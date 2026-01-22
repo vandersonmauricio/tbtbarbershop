@@ -1,0 +1,43 @@
+Atue como um Arquiteto de Software Java Sênior. Estou iniciando um projeto Spring Boot 3 com Java 21 e preciso que você gere a estrutura base do código (Scaffolding).
+
+**Stack e Dependências já instaladas:**
+- Spring Web
+- Spring Data JPA
+- PostgreSQL Driver
+- Lombok
+- Spring Security
+- Bean Validation
+
+**Contexto do Projeto:**
+É um sistema de agendamento para Barbearia (MVP).
+
+**O que eu preciso que você gere:**
+
+1. **Estrutura de Entidades (JPA):**
+   - Use anotações do Lombok (@Data, @Entity, etc).
+   - **User:** (id, nome, email, senha, role [ENUM: CLIENT, BARBER, ADMIN]).
+   - **BarberService:** (id, nome, preco (BigDecimal), duracaoEmMinutos (Integer)).
+   - **Barber:** (id, @OneToOne user, bio).
+   - **Appointment:** (id, @ManyToOne client, @ManyToOne barber, @ManyToOne service, LocalDateTime startAt, LocalDateTime endAt, Status [ENUM: PENDING, BOOKED, CANCELED]).
+
+2. **Repositórios:**
+   - Interfaces estendendo `JpaRepository` para todas as entidades.
+
+3. **Configuração de Segurança (Spring Security 6+):**
+   - Crie uma classe `SecurityConfig`.
+   - Implemente o `SecurityFilterChain` bean.
+   - Desabilite CSRF (pois é API REST).
+   - Deixe o endpoint `/auth/**` público (permitAll).
+   - Configure a sessão como STATELESS.
+   - *Nota: Não implemente a lógica complexa do filtro JWT agora, apenas deixe a estrutura da configuração pronta.*
+
+4. **Application Properties:**
+   - Gere o arquivo `application.properties` configurado para PostgreSQL local (use placeholders para variáveis de ambiente onde necessário).
+
+5. **Exemplo de DTO e Controller:**
+   - Crie apenas um `AppointmentController` com um endpoint POST para criar agendamento, recebendo um DTO (AppointmentCreateDTO) para exemplificar a validação (@Valid).
+
+**Regras de Código:**
+- Use injeção de dependência via construtor (Recomendação do Spring).
+- Não use `System.out.println`, use `Slf4j`.
+- Mantenha o código limpo e separado em pacotes: `.model`, `.repository`, `.controller`, `.config`, `.dto`.
